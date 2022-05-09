@@ -79,35 +79,13 @@ class NotificationHelper {
       ),
     );
   }
-  // void configureSelectNotificationSubject(BuildContext context, String route) {
-  //   selectNotificationSubject.stream.listen(
-  //         (String payload) async {
-  //       var data = json.decode(payload);
-  //       debugPrint("+++++++=data++++++" + data["Id"]);
-  //       await Navigator.pushNamed(context, route, arguments:data["Id"]);
-  //     },
-  //   );
-  // }
-  //
-  // void configureSelectNotificationSubject(BuildContext context ,String route) {
-  //   selectNotificationSubject.stream.listen(
-  //         (String payload) async {
-  //       print('Inside selectNotif, Payload: ' + payload + ' Route: ' + route);
-  //       var data = RestaurantResult.fromJson(json.decode(payload)['data']);
-  //       var restaurant = data.restaurants[json.decode(payload)['random_number']];
-  //       print(restaurant.name);
-  //
-  //       Navigator.pushNamed(context, '/detail_page', arguments: data);
-  //     },
-  //   );
-  // }
 
   void configureSelectedNotificationSubject(
       String route, BuildContext context) async {
     selectNotificationSubject.stream.listen(
           (String payload) {
         var data = RestaurantResult.fromJson(json.decode(payload)['data']);
-        var restaurant = data.restaurants[json.decode(payload)['number']].id;
+        var restaurant = data.restaurants[json.decode(payload)['number']];
         Navigator.pushNamed(context, route, arguments: restaurant);
       },
     );
