@@ -19,7 +19,7 @@ class PreferencesHelper {
   }
 
   Future<bool> get isDailyRestaurantActive async {
-    final prefs = await sharedPreferences;
+    final prefs = await SharedPreferences.getInstance();
     return prefs.getBool(DAILY_RESTAURANT) ?? false;
   }
 
