@@ -49,7 +49,10 @@ class MyApp extends StatelessWidget {
                 FavoriteProvider(databaseHelper: DatabaseHelper()),
           ),
           ChangeNotifierProvider<SchedulingProvider>(
-            create: (_) => SchedulingProvider(),
+            create: (_) => SchedulingProvider(
+                preferencesHelper: PreferencesHelper(
+              sharedPreferences: SharedPreferences.getInstance(),
+            )),
           ),
           ChangeNotifierProvider<PreferencesProvider>(
             create: (_) => PreferencesProvider(
@@ -79,7 +82,6 @@ class MyApp extends StatelessWidget {
                 HomePage.routeName: (context) => HomePage(),
                 RestaurantDetailPage.routeName: (context) =>
                     RestaurantDetailPage(
-                      id: ModalRoute.of(context)?.settings.arguments as String,
                       restaurant: ModalRoute.of(context)?.settings.arguments
                           as Restaurant,
                     ),
@@ -89,17 +91,4 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// ChangeNotifierProvider(
-// create: (context) => FavoriteProvider(databaseHelper: DatabaseHelper()),
-//void configureSelectNotificationSubject(String route) {
-//     selectNotificationSubject.stream.listen(
-//           (String payload) async {
-//         print('Inside selectNotif, Payload: ' + payload + ' Route: ' + route);
-//         var data = RestaurantResult.fromJson(json.decode(payload)['data']);
-//         var restaurant = data.restaurants[json.decode(payload)['random_number']];
-//         print(restaurant.name);
-//
-//         Navigation.intentWithData(route, RestaurantDetailPage(restaurant: restaurant, id: 'id',));
-//       },
-//     );
-//   }
+
